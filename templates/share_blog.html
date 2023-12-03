@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class = "col-sm-10">
+    {% if response %}
+            <h1 style="color: blue;">{{response.title}}</h1>
+            <p>Published {{response.created_at}} by {{user.username}}</p>
+            <br>
+            <p>{{response.content}}</p> 
+            <br> <br>            
+            
+            
+            <!-- The sharePost() function will be defined in JavaScript to handle the sharing action -->
+            {% endif%}
+
+            <center>
+                <h2> Share Post </h2>
+        
+        
+                <form action="{% url 'share-blog' response.id %}" method="post" style="text-align:center;">
+                    {% csrf_token %}
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" style="display:inline-block; margin-right:10px;"  required>
+                  
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" style="display:inline-block; margin-right:10px;" required>
+                     
+                    <label for="email">To:</label>
+                    <input type="email" id="email" name="to" style="display:inline-block; margin-right:10px;" required>
+                  
+                    <label for="comment">Comment:</label>
+                    <textarea id="comment" name="comment" rows="5" style="display:inline-block; vertical-align:top; margin-right:10px;" required></textarea>
+        
+                  
+                    <input type="submit" value="Submit" style="display:inline-block;">
+                  </form>
+            </center>        
+</div>
+{% endblock content %}
